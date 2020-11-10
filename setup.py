@@ -17,6 +17,7 @@ setup(
         'prometheus_client.bridge',
         'prometheus_client.openmetrics',
         'prometheus_client.twisted',
+        'prometheus_client.vendor'
     ],
     extras_require={
         'twisted': ['twisted'],
