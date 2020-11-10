@@ -2,6 +2,7 @@ import copy
 from threading import Lock
 
 from .metrics_core import Metric
+from .vendor import six
 
 
 class CollectorRegistry(object):
@@ -115,7 +116,7 @@ class CollectorRegistry(object):
             labels = {}
         for metric in self.collect():
             for s in metric.samples:
-                assert not isinstance(s, unicode), s
+                assert not isinstance(s, six.text_type), s
                 if s.name == name and s.labels == labels:
                     return s.value
         return None
