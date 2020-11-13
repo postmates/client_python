@@ -276,9 +276,9 @@ def cleanup_process(pid, prom_dir=None):
         "histogram_{}.db".format(pid),
     ]
     worker_paths = (os.path.join(prom_dir, f) for f in worker_paths)
-    worker_paths = filter(os.path.exists, worker_paths)
+    worker_paths = list(filter(os.path.exists, worker_paths))
     if worker_paths:
-        all_paths = worker_paths + filter(os.path.exists, merged_paths.values())
+        all_paths = worker_paths + list(filter(os.path.exists, merged_paths.values()))
         metrics = merge(all_paths, accumulate=False)
         _write_metrics(metrics, merged_paths)
     for worker_path in worker_paths:
@@ -385,7 +385,7 @@ def archive_metrics(root=None, blocking=True, aggregate_only=False):
     # TODO: Skip this step if we're using a MultiprocessCollector
 
     # Merge metrics and cache the results
-    archive_paths = filter(os.path.exists, _get_archive_paths(root).values())
+    archive_paths = list(filter(os.path.exists, _get_archive_paths(root).values()))
     metrics = merge(archive_paths + live_metrics_paths, accumulate=True)
     time_elapsed = time.time() - start_time
     _metrics_cache.write_metrics(metrics, time_elapsed)
