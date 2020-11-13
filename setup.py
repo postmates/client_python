@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="prometheus_client",
-    version="0.8.3",
+    version="0.8.4",
     author="Brian Brazil",
     author_email="brian.brazil@robustperception.io",
     description="Python client for the Prometheus monitoring system.",
