@@ -1,5 +1,11 @@
 import logging
-import thread
+
+from .vendor import six
+
+if six.PY3:
+    import _thread as thread_module
+else:
+    import thread as thread_module
 import time
 import traceback
 
@@ -28,7 +34,7 @@ def archive_thread():
 
 
 def start_archiver_thread():
-    thread.start_new_thread(archive_thread, (), {})
+    thread_module.start_new_thread(archive_thread, (), {})
 
 
 # on_starting is a gunicorn-specific server hook
